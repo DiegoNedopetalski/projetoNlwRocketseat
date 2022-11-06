@@ -28,14 +28,14 @@ export function AuthContextProvider({ children }: AuthProviderProps) {
     const [isUserLoading, setIsUserLoading] = useState(false)
 
     const [request, response, promptAsync] = Google.useAuthRequest({
-        clientId: '1042560043468-bbahbhcmosaougjqfimbqd1eoavunk96.apps.googleusercontent.com',
+        clientId: process.env.CLIENT_ID,
         redirectUri: AuthSession.makeRedirectUri({ useProxy: true }),
         scopes: ['profile', 'email']
     })
 
     async function singIn() {
         try {
-            setIsUserLoading(true);
+            setIsUserLoading(true); 
             await promptAsync();
         } catch (error) {
             console.log(error);
